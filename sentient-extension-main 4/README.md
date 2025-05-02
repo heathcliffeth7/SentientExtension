@@ -1,2 +1,0 @@
-# sentient-extension
-dc: heathcliffeth
