@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sentient is Everywhere Settings</title>
+  <meta charset="utf-8">
+  <style>
+    :root {
+      --bg-color: #fff;
+      --text-color: #333;
+      --card-bg: #fff;
+      --card-border: #eee;
+      --card-shadow: rgba(0, 0, 0, 0.05);
+      --info-bg: #f8f8f8;
+      --info-border: #333;
+      --switch-bg: #ccc;
+      --switch-active: #333;
+      --btn-bg: #333;
+      --btn-text: #fff;
+      --btn-hover: #555;
+      --select-border: #ddd;
+      --icon-fill: #555;
+      --status-bg: #f0f0f0;
+      --status-border: #ddd;
+    }
+
+    body.dark-theme {
+      --bg-color: #121212;
+      --text-color: #fff;
+      --card-bg: #1e1e1e;
+      --card-border: #333;
+      --card-shadow: rgba(0, 0, 0, 0.2);
+      --info-bg: #2a2a2a;
+      --info-border: #fff;
+      --switch-bg: #444;
+      --switch-active: #fff;
+      --btn-bg: #fff;
+      --btn-text: #000;
+      --btn-hover: #ddd;
+      --select-border: #444;
+      --icon-fill: #ccc;
+      --status-bg: #2a2a2a;
+      --status-border: #444;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      transition: all 0.3s ease;
+    }
+    
+    /* Main content styles */
+    .main-content {
+      padding: 30px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+    
+    h1 {
+      color: var(--text-color);
+      text-align: center;
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+    
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    
+    .logo {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+    }
+    
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px var(--card-shadow);
+      border: 1px solid var(--card-border);
+      transition: all 0.3s ease;
+    }
+    
+    .card h2 {
+      margin-top: 0;
+      color: var(--text-color);
+      font-size: 22px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+    
+    .option {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--switch-bg);
+      transition: .4s;
+      border-radius: 24px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: var(--switch-active);
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(26px);
+      background-color: var(--bg-color);
+    }
+    
+    .info-box {
+      background-color: var(--info-bg);
+      border-left: 4px solid var(--info-border);
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    .info-box p {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: var(--text-color);
+      transition: all 0.3s ease;
+    }
+    
+    .info-box ol {
+      margin-bottom: 0;
+      padding-left: 20px;
+      color: var(--text-color);
+      opacity: 0.8;
+      transition: all 0.3s ease;
+    }
+    
+    .info-box li {
+      margin-bottom: 8px;
+    }
+    
+    .dropdown-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: var(--text-color);
+      transition: all 0.3s ease;
+    }
+    
+    select {
+      padding: 10px;
+      border-radius: 4px;
+      border: 2px solid var(--select-border);
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      width: 100%;
+      max-width: 300px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    select:focus {
+      outline: none;
+      border-color: var(--text-color);
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    .save-button-top {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 101;
+    }
+    
+    .btn {
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.2s;
+      font-family: Arial, sans-serif;
+    }
+    
+    .btn:hover {
+      background-color: var(--btn-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .status-text {
+      display: none;
+      text-align: center;
+      font-weight: bold;
+      color: var(--text-color);
+      transition: all 0.3s ease;
+    }
+    
+    .success {
+      color: var(--text-color);
+      transition: all 0.3s ease;
+    }
+    
+    .custom-command-input {
+      display: flex;
+      margin-top: 15px;
+      gap: 10px;
+    }
+    
+    .command-input {
+      flex-grow: 1;
+      padding: 10px;
+      border-radius: 4px;
+      border: 2px solid var(--select-border);
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-small {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+    
+    .custom-command-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      background-color: var(--info-bg);
+      border-radius: 4px;
+      border: 1px solid var(--select-border);
+    }
+    
+    .command-name {
+      font-weight: bold;
+      color: var(--text-color);
+    }
+    
+    .delete-command {
+      background-color: transparent;
+      color: var(--text-color);
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    
+    .delete-command:hover {
+      opacity: 1;
+    }
+
+    /* Theme toggle switch styling */
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .theme-toggle label {
+      margin-right: 10px;
+      font-weight: bold;
+      color: var(--text-color);
+      transition: all 0.3s ease;
+    }
+
+    .theme-icon {
+      margin-left: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .theme-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--text-color);
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <!-- Theme Toggle -->
+  <div class="theme-toggle">
+    <label for="themeSwitch">Dark Mode</label>
+    <label class="switch">
+      <input type="checkbox" id="themeSwitch">
+      <span class="slider"></span>
+    </label>
+    <div class="theme-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="themeIcon">
+        <path d="M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+      <div class="logo-container">
+        <img src="images/sentient-logo.png" alt="Sentient is Everywhere Logo" class="logo">
+      </div>
+      <h1>Sentient is Everywhere Settings</h1>
+      
+      <!-- Save Button (Top Right) -->
+      <div class="save-button-top">
+        <button id="save" class="btn">Save Settings</button>
+      </div>
+      
+      <div class="card">
+        <h2>Display Options</h2>
+        <div class="option">
+          <label class="switch">
+            <input type="checkbox" id="floatingButton" checked>
+            <span class="slider"></span>
+          </label>
+          <label for="floatingButton">Show floating button</label>
+        </div>
+        <div class="option">
+          <label class="switch">
+            <input type="checkbox" id="contextMenu" checked>
+            <span class="slider"></span>
+          </label>
+          <label for="contextMenu">Show right-click context menu</label>
+        </div>
+        <div class="option">
+          <label class="switch">
+            <input type="checkbox" id="selectionMenu" checked>
+            <span class="slider"></span>
+          </label>
+          <label for="selectionMenu">Show selection menu</label>
+        </div>
+        
+        <!-- Button Size Option -->
+        <div class="option" style="margin-top: 20px;">
+          <label for="buttonSize" class="dropdown-label">Floating button size:</label>
+          <select id="buttonSize" style="max-width: 150px;">
+            <option value="small">Small (40px)</option>
+            <option value="medium" selected>Medium (50px)</option>
+            <option value="large">Large (60px)</option>
+            <option value="xlarge">Extra Large (70px)</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Custom Commands Section (Moved Up) -->
+      <div class="card">
+        <h2>Custom Commands</h2>
+        <div class="info-box">
+          <p><strong>Create your own custom commands:</strong></p>
+          <p>Add custom commands that will appear in both the selection menu and right-click context menu.</p>
+          <p><strong>Basic format:</strong> If you just enter a word like "translate", it will format as: "selected text, translate"</p>
+          <p><strong>Advanced format:</strong> You can use <code>&lt;selectedtext&gt;</code> placeholder for custom formatting:</p>
+          <ul>
+            <li>Example: <code>- &lt;selectedtext&gt; -</code> will display as <code>- -</code> in menus, but when executed will format as: <code>- selected text -</code></li>
+            <li>Example: <code>&lt;selectedtext&gt; how to do this?</code> will display as <code>how to do this?</code> in menus, but when executed will format as: <code>selected text how to do this?</code></li>
+          </ul>
+          <p><strong>How it works:</strong></p>
+          <ol>
+            <li>When you create a custom command, the <code>&lt;selectedtext&gt;</code> placeholder is removed from the display in menus</li>
+            <li>When you click the command, your selected text replaces the placeholder in the actual command</li>
+            <li>The formatted text is then sent to Sentient for processing</li>
+          </ol>
+        </div>
+        <div id="customCommandsContainer">
+          <!-- Custom commands will be added here dynamically -->
+        </div>
+        <div class="custom-command-input">
+          <input type="text" id="newCommandInput" placeholder="Enter new command name..." class="command-input">
+          <button id="addCommand" class="btn btn-small">Add Command</button>
+        </div>
+      </div>
+      
+      <!-- Feature Options Section (Moved Down) -->
+      <div class="card">
+        <h2>Feature Options</h2>
+        <div class="info-box">
+          <p><strong>Enable or disable specific features:</strong></p>
+          <p>You can toggle which features appear in the selection menu and right-click context menu.</p>
+        </div>
+        <div class="option">
+          <label class="switch">
+            <input type="checkbox" id="showSummarize" checked>
+            <span class="slider"></span>
+          </label>
+          <label for="showSummarize">Show Summarize feature</label>
+        </div>
+        <div class="option">
+          <label class="switch">
+            <input type="checkbox" id="showExplain" checked>
+            <span class="slider"></span>
+          </label>
+          <label for="showExplain">Show Explain feature</label>
+        </div>
+        <div class="option">
+          <label class="switch">
+            <input type="checkbox" id="showNewChat" checked>
+            <span class="slider"></span>
+          </label>
+          <label for="showNewChat">Show New Chat feature</label>
+        </div>
+        <div class="option">
+          <label class="switch">
+            <input type="checkbox" id="showSendSentient" checked>
+            <span class="slider"></span>
+          </label>
+          <label for="showSendSentient">Show Send Sentient feature</label>
+        </div>
+      </div>
+      
+      <div id="status" class="status-text"></div>
+    </div>
+  </div>
+  
+  <script src="options.js"></script>
+  <script src="theme.js"></script>
+</body>
+</html>
