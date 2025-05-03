@@ -17,7 +17,7 @@ From the extension settings, you can choose which features appear in the right-c
 With Sentient is Everywhere, carry your AI assistant with you everywhere and make your web experience more efficient!
 
 
-🧠 [Sentient is Everywhere - Chrome Web Store'da görüntüle](https://chromewebstore.google.com/detail/sentient-is-everywhere/ncmihjiondbfeidhncjjcmelknnbehmh?authuser=0&hl=tr)
+🧠 [View Sentient is Everywhere on the Chrome Web Store](https://chromewebstore.google.com/detail/sentient-is-everywhere/ncmihjiondbfeidhncjjcmelknnbehmh?authuser=0&hl=tr)
 
 
 
